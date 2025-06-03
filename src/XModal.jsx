@@ -42,28 +42,13 @@ const XModal = () => {
       return;
     }
 
-    if (!email) {
-      alert("Please fill in the Email field.");
-      return;
-    }
-
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
 
-    if (!phone) {
-      alert("Please fill in the Phone Number field.");
-      return;
-    }
-
     if (!/^\d{10}$/.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
-      return;
-    }
-
-    if (!dob) {
-      alert("Please fill in the Date of Birth field.");
       return;
     }
 
