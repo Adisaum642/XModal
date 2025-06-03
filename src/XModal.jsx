@@ -11,7 +11,6 @@ const XModal = () => {
 
   const modalRef = useRef();
 
-  // Close modal when clicking outside
   useEffect(() => {
     const handleOutsideClick = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -42,46 +41,60 @@ const XModal = () => {
       alert("Please fill in the Username field.");
       return;
     }
+
     if (!email) {
       alert("Please fill in the Email field.");
       return;
     }
+
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
+
     if (!phone) {
       alert("Please fill in the Phone Number field.");
       return;
     }
+
     if (!/^\d{10}$/.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
       return;
     }
+
     if (!dob) {
       alert("Please fill in the Date of Birth field.");
       return;
     }
+
     if (new Date(dob) > new Date()) {
       alert("Invalid date of birth. Date of birth cannot be in the future.");
       return;
     }
 
-    // All good, reset modal and form
+    // Reset form and close modal
     setFormData({ username: "", email: "", phone: "", dob: "" });
     setShowModal(false);
   };
 
   return (
-       <div style={{ height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-         <div>
-      <h1> User Details Modal</h1> </div>
+    <div
+      style={{
+        height: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <h1>User Details Modal</h1>
       {!showModal && (
         <button onClick={() => setShowModal(true)}>Open Form</button>
       )}
 
       {showModal && (
         <div
+          className="modal"
           style={{
             position: "fixed",
             top: 0,
@@ -95,6 +108,7 @@ const XModal = () => {
           }}
         >
           <div
+            className="modal-content"
             ref={modalRef}
             style={{
               backgroundColor: "white",
@@ -104,42 +118,49 @@ const XModal = () => {
             }}
           >
             <h2>Fill the Form</h2>
-            <div>
-              <label>Username:</label>
-              <input
-                id="username"
-                value={formData.username}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Email:</label>
-              <input
-                id="email"
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Phone Number:</label>
-              <input
-                id="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-              />
-            </div>
-            <div>
-              <label>Date of Birth:</label>
-              <input
-                id="dob"
-                type="date"
-                value={formData.dob}
-                onChange={handleInputChange}
-              />
-            </div>
-            <button className="submit-button" onClick={handleSubmit}>
-              Submit
-            </button>
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSubmit();
+              }}
+            >
+              <div>
+                <label>Username:</label>
+                <input
+                  id="username"
+                  value={formData.username}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label>Email:</label>
+                <input
+                  id="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label>Phone Number:</label>
+                <input
+                  id="phone"
+                  value={formData.phone}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <div>
+                <label>Date of Birth:</label>
+                <input
+                  id="dob"
+                  type="date"
+                  value={formData.dob}
+                  onChange={handleInputChange}
+                />
+              </div>
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </form>
           </div>
         </div>
       )}
