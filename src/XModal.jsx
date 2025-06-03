@@ -12,8 +12,8 @@ const XModal = () => {
   const modalRef = useRef();
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+    const handleOutsideClick = (e) => {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
         setShowModal(false);
       }
     };
@@ -37,8 +37,13 @@ const XModal = () => {
   const handleSubmit = () => {
     const { username, email, phone, dob } = formData;
 
-    if (username) {
+    if (!username) {
       alert("Please fill in the Username field.");
+      return;
+    }
+
+    if (!email) {
+      alert("Please fill in the Email field.");
       return;
     }
 
@@ -47,8 +52,18 @@ const XModal = () => {
       return;
     }
 
+    if (!phone) {
+      alert("Please fill in the Phone Number field.");
+      return;
+    }
+
     if (!/^\d{10}$/.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
+      return;
+    }
+
+    if (!dob) {
+      alert("Please fill in the Date of Birth field.");
       return;
     }
 
@@ -57,7 +72,7 @@ const XModal = () => {
       return;
     }
 
-    // Reset form and close modal
+    // Success: Reset form and close modal
     setFormData({ username: "", email: "", phone: "", dob: "" });
     setShowModal(false);
   };
