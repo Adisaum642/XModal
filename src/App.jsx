@@ -1,9 +1,10 @@
-import './App.css'
+import "./App.css";
+import XModal from "./XModal";
 
 export default function App() {
   return (
-    <main>
-      React ⚛️ + Vite ⚡ + Replit
-    </main>
-  )
+    <div>
+      <XModal />
+    </div>
+  );
 }
