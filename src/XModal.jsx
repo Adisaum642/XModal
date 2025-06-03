@@ -37,11 +37,6 @@ const XModal = () => {
   const handleSubmit = () => {
     const { username, email, phone, dob } = formData;
 
-    if (!username) {
-      alert("Please fill in the Username field.");
-      return;
-    }
-
     if (!email) {
       alert("Please fill in the Email field.");
       return;
